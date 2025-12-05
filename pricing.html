@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Prime IPTV</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="shortcut icon" type="image/png" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* --- NEW PREMIUM "NEBULA" HEADER --- */
+        .pricing-header-section {
+            background: #000; /* Start with black */
+            color: white;
+            text-align: center;
+            padding: 8rem 0 5rem; /* More breathing room */
+            margin-top: 0; /* Merges better with the top */
+            position: relative;
+            overflow: hidden;
+            isolation: isolate; /* Keeps the glowing blobs inside */
+        }
+        
+        /* The "Liquid" Animated Background Glow */
+        .pricing-header-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 100%;
+            /* Complex gradient for depth */
+            background: radial-gradient(circle at center, 
+                rgba(229, 9, 20, 0.6) 0%, 
+                rgba(160, 0, 10, 0.3) 35%, 
+                rgba(0, 0, 0, 0) 70%);
+            filter: blur(70px); /* Softens the light */
+            opacity: 0.9;
+            z-index: -1;
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+        }
+
+        /* Secondary ambient light for complexity */
+        .pricing-header-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(0,0,0,1) 0%, 
+                transparent 30%, 
+                transparent 70%, 
+                rgba(0,0,0,1) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        .pricing-header-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        /* Gradient Text Effect */
+        .pricing-header-title span {
+            display: block;
+            background: linear-gradient(to bottom right, #fff 30%, #ffcccb 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0.5rem;
+        }
+
+        .pricing-header-subtitle {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            
+            /* Glass pill effect for the subtitle */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        /* --- CARDS & GRID --- */
+        .pricing-cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card-new {
+            background: #000000;
+            border-radius: 16px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid #E50914;
+            box-shadow: 0 0 30px rgba(229, 9, 20, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .pricing-card-new:first-child {
+            border-color: #E50914;
+        }
+
+        .pricing-card-new:last-child {
+            border-color: #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .pricing-card-header {
+            padding: 1.5rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .plan-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .dropdowns {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .dropdown {
+            background: #1a1a1a;
+            border: 1px solid #E50914;
+            color: white;
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23E50914' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 0.65rem auto;
+        }
+
+        .dropdown:focus {
+            outline: none;
+            border-color: #f40612;
+            box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.3);
+        }
+
+        .dropdown option {
+            background: #000000;
+            color: white;
+            padding: 0.75rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .price-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .current-price {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .original-price {
+            font-size: 1.5rem;
+            color: #666;
+            text-decoration: line-through;
+            margin-right: 1rem;
+        }
+
+        .discount-badge {
+            background: #E50914;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0 2rem;
+            margin: 0;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            color: #b3b3b3;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: #E50914;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .order-button {
+            width: 100%;
+            padding: 1.25rem;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .order-button-red {
+            background: #E50914;
+            color: white;
+        }
+
+        .order-button-red:hover {
+            background: #f40612;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
+        }
+
+        .order-button-yellow {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .order-button-yellow:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .order-button:active {
+            transform: translateY(0);
+        }
+
+        .vip-elite-card {
+            background: linear-gradient(135deg, #000000 0%, #1a1a00 100%);
+        }
+
+        /* --- IOS 26 "LIQUID GLASS" TOGGLE EFFECT --- */
+        .plan-toggle-container {
+            display: inline-flex;
+            /* Dark "Cut-out" Background */
+            background: rgba(10, 10, 10, 0.5); 
+            
+            /* High Saturation Blur for Refraction Look */
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            
+            /* Subtle Bevel Border */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            
+            /* Deep Inner Shadow (The "Trough") */
+            box-shadow: 
+                inset 0 4px 12px rgba(0, 0, 0, 0.6),
+                0 20px 40px rgba(0, 0, 0, 0.4);
+            
+            border-radius: 99px;
+            padding: 4px;
+            gap: 0;
+            position: relative;
+            min-width: 300px;
+        }
+
+        /* The Moving "Liquid" Pill */
+        .plan-toggle-container::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: calc(50% - 4px); 
+            height: calc(100% - 8px);
+            
+            /* Liquid Gradient Animation (Moving Light) */
+            background: linear-gradient(110deg, 
+                rgba(229, 9, 20, 0.9) 0%, 
+                rgba(255, 60, 70, 0.95) 25%, /* Highlight */
+                rgba(229, 9, 20, 0.9) 50%,
+                rgba(180, 0, 10, 0.95) 100%
+            );
+            background-size: 200% 200%;
+            animation: liquidFlow 5s ease-in-out infinite; /* Living Animation */
+            
+            border-radius: 99px;
+            
+            /* Specular Highlights (Physical Glass Look) */
+            box-shadow: 
+                /* Top white edge (Light Source) */
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                /* Bottom dark edge (Depth) */
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+                /* Outer ambient glow */
+                0 4px 15px rgba(229, 9, 20, 0.4);
+                
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            
+            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+            z-index: 0;
+        }
+
+        /* Liquid Flow Keyframes */
+        @keyframes liquidFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Move slider to VIP position */
+        .plan-toggle-container.vip-active::before {
+            transform: translateX(100%);
+        }
+
+        /* Text Styles */
+        .plan-toggle-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 99px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            text-align: center;
+            mix-blend-mode: overlay; /* Blends text into the glowing background */
+        }
+
+        .plan-toggle-btn.active {
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            mix-blend-mode: normal;
+        }
+
+        .plan-toggle-btn:hover:not(.active) {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        /* ------------------------------------------- */
+
+        @media (max-width: 768px) {
+            .pricing-cards-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .dropdowns {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="site-logo-link">
+            <img src="assets/logo.png" alt="Prime IPTV Logo" class="site-logo-img">
+        </a>
+        
+        <nav class="main-navigation">
+            <ul id="primary-menu" class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html" class="active">Pricing</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="support.html">Contact us</a></li>
+                <li class="nav-cta">
+                    <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial">
+                        <span>Free Trial</span>
+                        <span style="margin-left: 0.5rem;">💬</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="mobile-controls">
+            <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial-mobile">
+                <span>Free Trial</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="primary-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<section class="pricing-header-section">
+    <div class="container">
+        <h1 class="pricing-header-title">
+        
+            <span>IPTV Pricing</span>
+        </h1>
+        <div class="pricing-header-subtitle">Choose the perfect plan for your IPTV streaming needs!</div>
+    </div>
+</section>
+
+<section class="section pricing-section">
+    <div class="container">
+        <div class="pricing-cards-container">
+            <div class="pricing-card-new" data-plan="essential">
+                <div class="pricing-card-header">
+                    <div class="plan-title">Essential</div>
+                    <div class="dropdowns">
+                        <select class="dropdown time-dropdown">
+                            <option value="1">1 Month</option>
+                            <option value="3">3 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="12">12 Months</option>
+                        </select>
+                        <select class="dropdown device-dropdown">
+                            <option value="1">1 Device</option>
+                            <option value="2">2 Devices</option>
+                            <option value="3">3 Devices</option>
+                            <option value="4">4 Devices</option>
+                            <option value="5">5 Devices</option>
+                        </select>
+                    </div>
+                    <div class="price-section">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span class="original-price" style="display: none;"></span>
+                            <span class="discount-badge">50% OFF</span>
+                        </div>
+                        <div class="current-price">$<span class="price-amount">16</span></div>
+                    </div>
+                </div>
+                <ul class="pricing-features">
+                    <li>1 device access at the same time</li>
+                    <li>20,000+ live TV channels</li>
+                    <li>90,000+ VOD</li>
+                    <li>Customizable channel categories</li>
+                    <li>Limited EPG guide & video on demand</li>
+                    <li>All sports channels included</li>
+                    <li>UHD, FHD, HD channels</li>
+                    <li>May require VPN</li>
+                    <li>Stable server (99% uptime)</li>
+                    <li>24/7 dedicated support</li>
+                    <li>7-day money-back guarantee</li>
+                </ul>
+                <button class="order-button order-button-red" onclick="orderPlan('essential')">Order Now</button>
+            </div>
+
+            <div class="pricing-card-new vip-elite-card" data-plan="vip">
+                <div class="pricing-card-header">
+                    <div class="plan-title" style="color: #ffd700;">VIP Elite</div>
+                    <div class="dropdowns">
+                        <select class="dropdown time-dropdown">
+                            <option value="1">1 Month</option>
+                            <option value="3">3 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="12">12 Months</option>
+                        </select>
+                        <select class="dropdown device-dropdown">
+                            <option value="1">1 Device</option>
+                            <option value="2">2 Devices</option>
+                            <option value="3">3 Devices</option>
+                            <option value="4">4 Devices</option>
+                            <option value="5">5 Devices</option>
+                        </select>
+                    </div>
+                    <div class="price-section">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span class="original-price" style="display: none;"></span>
+                            <span class="discount-badge">50% OFF</span>
+                        </div>
+                        <div class="current-price" style="color: #ffd700;">$<span class="price-amount">25</span></div>
+                    </div>
+                </div>
+                <ul class="pricing-features">
+                    <li>1 device access at the same time</li>
+                    <li>50,000+ live TV channels</li>
+                    <li>Free Ibo Player app</li>
+                    <li>Anti-freeze technology</li>
+                    <li>120,000+ VOD (updated weekly)</li>
+                    <li>Customizable channel categories</li>
+                    <li>Full EPG guide & on-demand video</li>
+                    <li>All sports channels included</li>
+                    <li>UHD, FHD, HD, 4K channels</li>
+                    <li>PPV & live events</li>
+                    <li>24/7 catch-up/replay functionality</li>
+                    <li>24/7 dedicated support</li>
+                    <li>Dedicated app included</li>
+                    <li>15-day full money-back guarantee</li>
+                </ul>
+                <button class="order-button order-button-yellow" onclick="orderPlan('vip')">Order Now</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="plan-comparison-section" style="background: linear-gradient(135deg, #1a0000 0%, #000000 100%); padding: 5rem 0;">
+    <div class="container" style="max-width: 1200px;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">What's the Difference?</h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">Essential covers the basics. VIP adds content, power, and instant channel customization.</p>
+            
+            <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                <div class="plan-toggle-container">
+                    <button class="plan-toggle-btn active" data-plan="essential" onclick="togglePlanComparison('essential')">Essential</button>
+                    <button class="plan-toggle-btn" data-plan="vip" onclick="togglePlanComparison('vip')">VIP</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem;">
+            <div style="background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 12px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div class="stat-value" id="channelsCount" style="font-size: 2.5rem; font-weight: 900; color: var(--netflix-red); margin-bottom: 0.5rem;">20,000+</div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem;">Live Channels</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 12px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div class="stat-value" id="vodCount" style="font-size: 2.5rem; font-weight: 900; color: var(--netflix-red); margin-bottom: 0.5rem;">90,000+</div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem;">VOD Library</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 12px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div class="stat-value" id="refundDays" style="font-size: 2.5rem; font-weight: 900; color: var(--netflix-red); margin-bottom: 0.5rem;">7 days</div>
+                <div style="color: var(--text-secondary); font-size: 0.9rem;">Money-Back Guarantee</div>
+            </div>
+        </div>
+
+        <div id="vipBanner" style="display: none; background: rgba(229, 9, 20, 0.15); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--netflix-red);">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span style="font-size: 2rem;">⭐</span>
+                <p style="margin: 0; color: white; font-weight: 600;">VIP: Instant channel customization after purchase — custom packs on the spot.</p>
+            </div>
+        </div>
+
+        <div class="features-comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-name">Instant Activation!</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-activation">Included</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">📱</span>
+                    <span class="feature-name">Ibo Player App — Free</span>
+                </div>
+                <div class="feature-badge badge-vip" id="badge-ibo">VIP Only</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">📺</span>
+                    <span class="feature-name">Netflix + Amazon Prime + Disney + + Plus+</span>
+                </div>
+                <div class="feature-badge badge-varies" id="badge-streaming">Varie</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">🏆</span>
+                    <span class="feature-name">All Sports Channels Available</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-sports">Core</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">📁</span>
+                    <span class="feature-name">Customizable Channel Categories</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-categories">Included</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">📡</span>
+                    <span class="feature-name">Catch-up & EPG</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-epg">Coeur</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">📺</span>
+                    <span class="feature-name">UHD + Full HD + HD</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-quality">Coeur</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">🚀</span>
+                    <span class="feature-name">Fast & Stable - Always Available</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-stable">Coeur</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">❄️</span>
+                    <span class="feature-name">Anti-Freeze™ Technology 9.8</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-antifreeze">Coeur</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">🛡️</span>
+                    <span class="feature-name">May Require VPN</span>
+                </div>
+                <div class="feature-badge badge-limited" id="badge-vpn">:::::</div>
+            </div>
+
+            <div class="comparison-feature-row">
+                <div class="feature-info">
+                    <span class="feature-icon">💬</span>
+                    <span class="feature-name">24/7 Dedicated Support</span>
+                </div>
+                <div class="feature-badge badge-included" id="badge-support">Included</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Prime IPTV Logo" class="footer-logo">
+                <p class="footer-description">Premium IPTV service provider offering high-quality streams for individuals worldwide.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="mailto:contact@primeiptv.com">contact@primeiptv.com</a></li>
+                    <li><a href="tel:+19053901140">+1 (905) 390-1140</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-newsletter">
+                <h4>Join Us</h4>
+                <p>Get updates on special offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email" required>
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="#">DMCA</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Refund Policy</a>
+                <a href="faq.html">FAQ</a>
+                <a href="support.html">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2025 Prime IPTV. All rights reserved</p>
+                <p>Designed with ❤️ for an optimal IPTV experience</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script defer src="js/nav-indicator.js"></script>
+
+    <script>
+        // Pricing data
+        const pricingData = {
+            essential: {
+                1: {1: 16, 2: 30, 3: 35, 4: 50, 5: 55},
+                3: {1: 35, 2: 45, 3: 55, 4: 70, 5: 85},
+                6: {1: 45, 2: 65, 3: 85, 4: 105, 5: 120},
+                12: {1: 65, 2: 100, 3: 130, 4: 155, 5: 180}
+            },
+            vip: {
+                1: {1: 25, 2: 36, 3: 45, 4: 55, 5: 65},
+                3: {1: 45, 2: 65, 3: 90, 4: 110, 5: 125},
+                6: {1: 65, 2: 100, 3: 130, 4: 155, 5: 175},
+                12: {1: 100, 2: 160, 3: 210, 4: 250, 5: 290}
+            }
+        };
+
+        // Plan Comparison Toggle
+        function togglePlanComparison(plan) {
+            // Update toggle buttons
+            const container = document.querySelector('.plan-toggle-container');
+            document.querySelectorAll('.plan-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.plan === plan) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update container class for sliding animation
+            if (plan === 'vip') {
+                container.classList.add('vip-active');
+            } else {
+                container.classList.remove('vip-active');
+            }
+
+            // Update stats
+            const channelsCount = document.getElementById('channelsCount');
+            const vodCount = document.getElementById('vodCount');
+            const refundDays = document.getElementById('refundDays');
+            const vipBanner = document.getElementById('vipBanner');
+
+            if (plan === 'essential') {
+                channelsCount.textContent = '20,000+';
+                vodCount.textContent = '90,000+';
+                refundDays.textContent = '7 days';
+                vipBanner.style.display = 'none';
+
+                // Update badges for Essential
+                document.getElementById('badge-activation').textContent = 'Included';
+                document.getElementById('badge-activation').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-ibo').textContent = 'VIP Only';
+                document.getElementById('badge-ibo').className = 'feature-badge badge-vip';
+                
+                document.getElementById('badge-streaming').textContent = 'Varies';
+                document.getElementById('badge-streaming').className = 'feature-badge badge-varies';
+                
+                document.getElementById('badge-sports').textContent = 'Core';
+                document.getElementById('badge-sports').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-categories').textContent = 'Included';
+                document.getElementById('badge-categories').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-epg').textContent = 'Core';
+                document.getElementById('badge-epg').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-quality').textContent = 'Core';
+                document.getElementById('badge-quality').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-stable').textContent = 'Core';
+                document.getElementById('badge-stable').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-antifreeze').textContent = 'Core';
+                document.getElementById('badge-antifreeze').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-vpn').textContent = 'Limited';
+                document.getElementById('badge-vpn').className = 'feature-badge badge-limited';
+                
+                document.getElementById('badge-support').textContent = 'Included';
+                document.getElementById('badge-support').className = 'feature-badge badge-included';
+            } else {
+                channelsCount.textContent = '50,000+';
+                vodCount.textContent = '120,000+';
+                refundDays.textContent = '15 days';
+
+                // Update badges for VIP
+                document.getElementById('badge-activation').textContent = 'Included';
+                document.getElementById('badge-activation').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-ibo').textContent = 'Included';
+                document.getElementById('badge-ibo').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-streaming').textContent = 'Included';
+                document.getElementById('badge-streaming').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-sports').textContent = 'Complete';
+                document.getElementById('badge-sports').className = 'feature-badge badge-vip';
+                
+                document.getElementById('badge-categories').textContent = 'Included';
+                document.getElementById('badge-categories').className = 'feature-badge badge-included';
+                
+                document.getElementById('badge-epg').textContent = 'Extended';
+                document.getElementById('badge-epg').className = 'feature-badge badge-vip';
+                
+                document.getElementById('badge-quality').textContent = '4K + UHD + FHD + HD';
+                document.getElementById('badge-quality').className = 'feature-badge badge-vip';
+                
+                document.getElementById('badge-stable').textContent = 'Priority';
+                document.getElementById('badge-stable').className = 'feature-badge badge-vip';
+                
+                document.getElementById('badge-antifreeze').textContent = 'Pro';
+                document.getElementById('badge-antifreeze').className = 'feature-badge badge-vip';
+                
+                document.getElementById('badge-vpn').textContent = 'Complete';
+                document.getElementById('badge-vpn').className = 'feature-badge badge-vip';
+                
+                document.getElementById('badge-support').textContent = 'Priority';
+                document.getElementById('badge-support').className = 'feature-badge badge-vip';
+            }
+        }
+
+        // Sticky Header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.site-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Dynamic Pricing Functionality
+        function updatePrice(card) {
+            const planType = card.dataset.plan;
+            const timeDropdown = card.querySelector('.time-dropdown');
+            const deviceDropdown = card.querySelector('.device-dropdown');
+            const priceAmount = card.querySelector('.price-amount');
+            const originalPrice = card.querySelector('.original-price');
+            const deviceAccessText = card.querySelector('.pricing-features li:first-child');
+
+            const selectedTime = parseInt(timeDropdown.value);
+            const selectedDevices = parseInt(deviceDropdown.value);
+
+            const currentPrice = pricingData[planType][selectedTime][selectedDevices];
+            const originalPriceValue = currentPrice * 2; // Since it's 50% off
+
+            priceAmount.textContent = currentPrice;
+            originalPrice.textContent = `$${originalPriceValue}`;
+            originalPrice.style.display = 'inline';
+
+            // Update device access description
+            if (deviceAccessText) {
+                if (selectedDevices === 1) {
+                    deviceAccessText.textContent = '1 device access at the same time';
+                } else {
+                    deviceAccessText.textContent = `${selectedDevices} devices access at the same time`;
+                }
+            }
+        }
+
+        // Initialize pricing and add event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const pricingCards = document.querySelectorAll('.pricing-card-new');
+
+            pricingCards.forEach(card => {
+                updatePrice(card);
+
+                const timeDropdown = card.querySelector('.time-dropdown');
+                const deviceDropdown = card.querySelector('.device-dropdown');
+
+                timeDropdown.addEventListener('change', () => updatePrice(card));
+                deviceDropdown.addEventListener('change', () => updatePrice(card));
+            });
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.querySelector('.mobile-menu-btn');
+        const links = document.getElementById('primary-menu');
+        
+        if (btn && links) {
+            const icon = btn.querySelector('i');
+
+            function closeMenu() {
+                links.classList.remove('is-open');
+                btn.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+                if (icon) icon.className = 'fas fa-bars';
+            }
+
+            btn.addEventListener('click', function() {
+                const open = links.classList.toggle('is-open');
+                btn.classList.toggle('active', open);
+                btn.setAttribute('aria-expanded', String(open));
+                if (icon) icon.className = open ? 'fas fa-times' : 'fas fa-bars';
+            });
+
+            // Close on link click (mobile)
+            links.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    closeMenu();
+                });
+            });
+
+            // Close if resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 900) closeMenu();
+            });
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Order Plan Function
+        function orderPlan(planType) {
+            // Find the card for this plan
+            const card = document.querySelector(`.pricing-card-new[data-plan="${planType}"]`);
+            
+            if (card) {
+                const timeDropdown = card.querySelector('.time-dropdown');
+                const deviceDropdown = card.querySelector('.device-dropdown');
+                const priceAmount = card.querySelector('.price-amount');
+                
+                const selectedTime = timeDropdown.value;
+                const selectedDevices = deviceDropdown.value;
+                const price = priceAmount.textContent;
+                
+                // Redirect to WhatsApp with order details
+                const message = `Hello, I'm interested in the ${planType} plan for ${selectedTime} with ${selectedDevices} for ${price}`;
+                window.location.href = `https://wa.me/19053901140?text=${encodeURIComponent(message)}`;
+            }
+        }
+    </script>
+
+</body>
+</html>

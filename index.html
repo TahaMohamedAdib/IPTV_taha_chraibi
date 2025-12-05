@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime IPTV - Premium Streaming Service</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="shortcut icon" type="image/png" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="site-logo-link">
+            <img src="assets/logo.png" alt="Prime IPTV Logo" class="site-logo-img">
+        </a>
+        
+        <!-- Responsive Nav -->
+        <nav class="main-navigation">
+            <ul id="primary-menu" class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="support.html">Contact us</a></li>
+                <li class="nav-cta">
+                    <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial">
+                        <span>Free Trial</span>
+                        <span style="margin-left: 0.5rem;">💬</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial-mobile">
+                <span>Free Trial</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="primary-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" oncanplay="this.style.opacity=1">
+        <source src="assets/hero-background.mp4?v=1" type="video/mp4">
+        <source src="assets/hero-background.webm" type="video/webm">
+        <!-- Video not available - showing gradient background -->
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <h1>Unlimited Entertainment, Anytime, Anywhere</h1>
+        <p>Experience premium IPTV service with over 10,000+ channels, HD/4K quality, and 99.9% uptime</p>
+        <div class="hero-buttons">
+            <a href="pricing.html" class="btn btn-primary">Get Started Now</a>
+            <a href="features.html" class="btn btn-secondary">Learn More</a>
+        </div>
+        <!-- Video Status Indicator (Development Helper) -->
+        <div class="video-status" style="position: absolute; bottom: 10px; right: 10px; font-size: 0.8rem; color: var(--text-secondary); opacity: 0.7; background: rgba(0,0,0,0.8); padding: 5px 10px; border-radius: 4px; z-index: 9999; display: none;">
+            Background Video: <span id="video-status">Loading...</span>
+        </div>
+    </div>
+</section>
+
+<!-- Content Showcase Section with Scrolling Animation -->
+<section class="content-showcase" style="background: #000; padding: 4rem 0; overflow: hidden;">
+    <div class="container">
+        <div class="section-title" style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Watch What You Love</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem;">Sports, News, Movies & TV Shows</p>
+        </div>
+    </div>
+    
+    <!-- First Row - Scrolling Right -->
+    <div class="content-row scroll-right">
+        <div class="content-card">
+            <img src="images/champions_leagues.png" alt="Champions League">
+            <div class="content-overlay">
+                <h3>Champions League</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/premier_league.png" alt="Premier League">
+            <div class="content-overlay">
+                <h3>Premier League</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/Laliga.webp" alt="La Liga">
+            <div class="content-overlay">
+                <h3>La Liga</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/abc_news.png" alt="ABC News">
+            <div class="content-overlay">
+                <h3>ABC News</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/fox_news.png" alt="Fox News">
+            <div class="content-overlay">
+                <h3>Fox News</h3>
+            </div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="content-card">
+            <img src="images/champions_leagues.png" alt="Champions League">
+            <div class="content-overlay">
+                <h3>Champions League</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/premier_league.png" alt="Premier League">
+            <div class="content-overlay">
+                <h3>Premier League</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/Laliga.webp" alt="La Liga">
+            <div class="content-overlay">
+                <h3>La Liga</h3>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Second Row - Scrolling Left -->
+    <div class="content-row scroll-left">
+        <div class="content-card">
+            <img src="images/bbc_news.jpg" alt="BBC News">
+            <div class="content-overlay">
+                <h3>BBC News</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/breaking bad.jpeg" alt="Breaking Bad">
+            <div class="content-overlay">
+                <h3>Breaking Bad</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/prisonbreak.jpeg" alt="Prison Break">
+            <div class="content-overlay">
+                <h3>Prison Break</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/suits.jpeg" alt="Suits">
+            <div class="content-overlay">
+                <h3>Suits</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/peaky_blinders.jpeg" alt="Peaky Blinders">
+            <div class="content-overlay">
+                <h3>Peaky Blinders</h3>
+            </div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="content-card">
+            <img src="images/bbc_news.jpg" alt="BBC News">
+            <div class="content-overlay">
+                <h3>BBC News</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/breaking bad.jpeg" alt="Breaking Bad">
+            <div class="content-overlay">
+                <h3>Breaking Bad</h3>
+            </div>
+        </div>
+        <div class="content-card">
+            <img src="images/prisonbreak.jpeg" alt="Prison Break">
+            <div class="content-overlay">
+                <h3>Prison Break</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section with Counter Animation -->
+<section class="stats-section" style="background: linear-gradient(135deg, #1a0000 0%, #000000 100%); padding: 5rem 0; position: relative; overflow: hidden;">
+    <div class="container">
+        <div class="stats-header" style="text-align: center; margin-bottom: 4rem;">
+            <p style="color: var(--netflix-red); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 1rem;">ADVANTAGES</p>
+            <h2 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem;">JOIN OVER 2,000+ SATISFIED CUSTOMERS</h2>
+            <div style="width: 100px; height: 4px; background: var(--netflix-red); margin: 0 auto;"></div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" data-target="40000">0</div>
+                <div class="stat-plus">+</div>
+                <h3 class="stat-label">CHANNELS</h3>
+                <p class="stat-description">Enjoy the best rated TV channels with the best streaming experience.</p>
+            </div>
+            
+            <div class="stat-card stat-featured">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-plus">+</div>
+                <h3 class="stat-label">Countries</h3>
+                <p class="stat-description">Available everywhere at any time.</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-number" data-target="99.99">0</div>
+                <div class="stat-percent">%</div>
+                <h3 class="stat-label">UPTIME</h3>
+                <p class="stat-description">No downtime, no power outage - never.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Multi-Device Experience Section -->
+<section class="device-experience-section" style="background: linear-gradient(180deg, #000 0%, #0a0a0a 100%); padding: 6rem 0;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <!-- Image Side -->
+            <div style="position: relative;">
+                <img src="images/Gemini_Generated_Image_ppc7aeppc7aeppc7.png" alt="Watch IPTV on Any Device" style="width: 100%; border-radius: 16px; box-shadow: 0 20px 60px rgba(229, 9, 20, 0.3); transition: transform 0.3s ease;">
+                <div style="position: absolute; top: -20px; right: -20px; background: var(--netflix-red); color: white; padding: 1rem 1.5rem; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 30px rgba(229, 9, 20, 0.5);">
+                    📺 Multi-Device
+                </div>
+            </div>
+            
+            <!-- Content Side -->
+            <div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: white; font-weight: 700;">
+                    Watch <span style="color: var(--netflix-red);">Anywhere</span>, On Any Device
+                </h2>
+                <p style="font-size: 1.2rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                    Enjoy seamless streaming on your laptop, smart TV, tablet, or smartphone. Our IPTV service works perfectly across all your devices with a single subscription.
+                </p>
+                
+                <div style="display: grid; gap: 1.5rem;">
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <div style="background: rgba(229, 9, 20, 0.1); padding: 0.75rem; border-radius: 8px; flex-shrink: 0;">
+                            <span style="font-size: 1.5rem;">💻</span>
+                        </div>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem; font-size: 1.1rem;">Desktop & Laptop</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">Stream directly from your browser or dedicated app</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <div style="background: rgba(229, 9, 20, 0.1); padding: 0.75rem; border-radius: 8px; flex-shrink: 0;">
+                            <span style="font-size: 1.5rem;">📱</span>
+                        </div>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem; font-size: 1.1rem;">Mobile & Tablet</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">Watch on-the-go with iOS and Android apps</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: start; gap: 1rem;">
+                        <div style="background: rgba(229, 9, 20, 0.1); padding: 0.75rem; border-radius: 8px; flex-shrink: 0;">
+                            <span style="font-size: 1.5rem;">📺</span>
+                        </div>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem; font-size: 1.1rem;">Smart TV & Streaming Devices</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">Compatible with Fire Stick, Android TV, Apple TV & more</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="tutorials.html" style="display: inline-block; margin-top: 2rem; padding: 1rem 2rem; background: var(--netflix-red); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);">
+                    Setup Guide →
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section (Example of content after hero) -->
+<section class="about-section" style="background: #000; padding: 4rem 0;">
+    <div class="container">
+        <div class="section-title" style="text-align: center; margin-bottom: 3rem;">
+            <h2>Why Choose Prime IPTV?</h2>
+            <p style="color: var(--text-secondary);">Experience the future of television</p>
+        </div>
+        
+        <!-- Comparison Table -->
+        <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="feature-column">Compare Competitors</th>
+                        <th class="competitor-column">Other Providers</th>
+                        <th class="prime-column">Prime IPTV Service</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">Live Channels</td>
+                        <td class="competitor-value">12,000+</td>
+                        <td class="prime-value highlight">Over 40,000</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Movies & Series</td>
+                        <td class="competitor-value">Over 40,000</td>
+                        <td class="prime-value highlight">90,000+</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">After-Sales Support</td>
+                        <td class="competitor-value">LIMITED</td>
+                        <td class="prime-value highlight">UNLIMITED</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Anti-Freeze System</td>
+                        <td class="competitor-value"><span class="icon-cross">✕</span></td>
+                        <td class="prime-value"><span class="icon-check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Electronic Program Guide (EPG)</td>
+                        <td class="competitor-value"><span class="icon-cross">✕</span></td>
+                        <td class="prime-value"><span class="icon-check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">99.9% Uptime Guarantee</td>
+                        <td class="competitor-value"><span class="icon-cross">✕</span></td>
+                        <td class="prime-value"><span class="icon-check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Social Experience Section -->
+<section class="social-experience-section" style="background: #000; padding: 6rem 0;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <!-- Content Side -->
+            <div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: white; font-weight: 700; line-height: 1.2;">
+                    Share the <span style="color: var(--netflix-red);">Excitement</span> with Friends & Family
+                </h2>
+                <p style="font-size: 1.2rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                    Watch live sports, movies, and shows together. Create unforgettable moments with your loved ones while enjoying premium entertainment.
+                </p>
+                
+                <div style="display: grid; gap: 1.5rem; margin-bottom: 2.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="background: var(--netflix-red); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <span style="font-size: 1.3rem;">⚽</span>
+                        </div>
+                        <div>
+                            <p style="color: white; font-weight: 600; margin: 0;">Live Sports in HD/4K</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Never miss a game with our comprehensive sports coverage</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="background: var(--netflix-red); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <span style="font-size: 1.3rem;">👥</span>
+                        </div>
+                        <div>
+                            <p style="color: white; font-weight: 600; margin: 0;">Multiple Connections</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Stream on multiple devices simultaneously</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="background: var(--netflix-red); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <span style="font-size: 1.3rem;">🎬</span>
+                        </div>
+                        <div>
+                            <p style="color: white; font-weight: 600; margin: 0;">90,000+ Movies & Shows</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Something for everyone in the family</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="pricing.html" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--netflix-red); color: white; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4); text-transform: uppercase; letter-spacing: 0.5px;">
+                    Start Watching Now →
+                </a>
+            </div>
+            
+            <!-- Image Side -->
+            <div class="social-image-container">
+                <img src="images/full-shot-friends-spending-time-together.jpg" alt="Friends Watching Sports Together" class="social-experience-img">
+                <div class="customer-badge">
+                    <div class="badge-number">10,000+</div>
+                    <div class="badge-text">Happy Customers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action - Pricing Section -->
+<section class="cta-pricing-section" style="background: linear-gradient(135deg, #E50914 0%, #b20710 100%); padding: 5rem 0; position: relative; overflow: hidden;">
+    <!-- Animated Background Elements -->
+    <div class="cta-bg-animation"></div>
+    
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="cta-content" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">
+                Ready to Experience Premium IPTV?
+            </h2>
+            <p style="font-size: 1.3rem; margin-bottom: 3rem; color: rgba(255,255,255,0.95); line-height: 1.8;">
+                Join thousands of satisfied customers enjoying unlimited entertainment. Choose your perfect plan and start watching today!
+            </p>
+            
+            <!-- Pricing Highlights -->
+            <div class="cta-pricing-highlights" style="display: flex; justify-content: center; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap;">
+                <div class="cta-highlight" style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">$16</div>
+                    <div style="font-size: 1.1rem; opacity: 0.9;">Starting From</div>
+                </div>
+                <div class="cta-highlight" style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">40K+</div>
+                    <div style="font-size: 1.1rem; opacity: 0.9;">Channels</div>
+                </div>
+                <div class="cta-highlight" style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">99.9%</div>
+                    <div style="font-size: 1.1rem; opacity: 0.9;">Uptime</div>
+                </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="cta-buttons" style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="pricing.html" class="btn-cta-primary">
+                    <span class="btn-text">View All Plans</span>
+                    <span class="btn-icon">→</span>
+                </a>
+                <a href="pricing.html#contact" class="btn-cta-secondary">
+                    <span class="btn-text">Get Free Trial</span>
+                    <span class="btn-icon">🎁</span>
+                </a>
+            </div>
+            
+            <!-- Trust Badges -->
+            <div class="trust-badges" style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; opacity: 0.9;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✓</span>
+                    <span>No Contract</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✓</span>
+                    <span>7-Day Money Back Guarantee</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.5rem;">✓</span>
+                    <span>24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section features-section" style="background: var(--dark-bg); padding: 6rem 0;">
+    <div class="container">
+        <div class="section-title" style="text-align: center; margin-bottom: 4rem;">
+            <h2 style="font-size: 3rem; margin-bottom: 1rem;">Amazing Features</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem;">Everything you need for the perfect streaming experience</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Setup</h3>
+                <p>Get started in minutes with our simple setup process</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>All Devices</h3>
+                <p>Watch on Smart TV, phone, tablet, or computer</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure Payment</h3>
+                <p>SSL encrypted transactions via Shopify</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>24/7 Support</h3>
+                <p>Always here to help via chat, WhatsApp, or email</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Money-Back</h3>
+                <p>7-day satisfaction guarantee on all plans</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Global Content</h3>
+                <p>Channels from around the world in multiple languages</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Prime IPTV Logo" class="footer-logo">
+                <p class="footer-description">Premium IPTV service provider offering high-quality streams for individuals worldwide.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="mailto:contact@primeiptv.com">contact@primeiptv.com</a></li>
+                    <li><a href="tel:+19053901140">+1 (905) 390-1140</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="footer-newsletter">
+                <h4>Join Us</h4>
+                <p>Get updates on special offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email" required>
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="#">DMCA</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Refund Policy</a>
+                <a href="faq.html">FAQ</a>
+                <a href="support.html">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2025 Prime IPTV. All rights reserved</p>
+                <p>Designed with ❤️ for an optimal IPTV experience</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script defer src="js/nav-indicator.js"></script>
+
+<script>
+    // Mobile Menu Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.querySelector('.mobile-menu-btn');
+        const links = document.getElementById('primary-menu');
+        
+        if (!btn || !links) return;
+
+        const icon = btn.querySelector('i');
+
+        function closeMenu() {
+            links.classList.remove('is-open');
+            btn.classList.remove('active');
+            btn.setAttribute('aria-expanded', 'false');
+            if (icon) icon.className = 'fas fa-bars';
+        }
+
+        btn.addEventListener('click', function() {
+            const open = links.classList.toggle('is-open');
+            btn.classList.toggle('active', open);
+            btn.setAttribute('aria-expanded', String(open));
+            if (icon) icon.className = open ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // Close on link click (mobile)
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                closeMenu();
+            });
+        });
+
+        // Close if resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 900) closeMenu();
+        });
+    });
+
+    // Sticky Header
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Video Background Handler
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.querySelector('.hero-video');
+        const statusElement = document.getElementById('video-status');
+        const gradientAnimation = document.querySelector('.hero-gradient-animation');
+
+        if (video) {
+            // Check if video has a valid source
+            const hasValidSource = video.querySelector('source[src]');
+            
+            if (statusElement) {
+                if (hasValidSource) {
+                    statusElement.textContent = 'Video Source Found - ' + hasValidSource.src;
+                    statusElement.style.color = '#2196F3'; // Blue for found
+                } else {
+                    statusElement.textContent = 'No Video Source Found';
+                    statusElement.style.color = '#f44336'; // Red for error
+                }
+            }
+
+            if (!hasValidSource || !video.src) {
+                // No video source - show animated gradient
+                if (gradientAnimation) {
+                    gradientAnimation.style.opacity = '1';
+                }
+                if (statusElement) {
+                    statusElement.textContent = 'Using Animated Background';
+                    statusElement.style.color = '#ff9800'; // Orange for animated fallback
+                }
+            } else {
+                // Show loading status initially
+                if (statusElement) {
+                    statusElement.textContent = 'Loading Video...';
+                    statusElement.style.color = '#2196F3'; // Blue for loading
+                }
+
+                // Has video source - check if it loads successfully
+                video.addEventListener('loadstart', function() {
+                    if (statusElement) {
+                        statusElement.textContent = 'Starting Download...';
+                        statusElement.style.color = '#ff9800'; // Orange for downloading
+                    }
+                });
+
+                video.addEventListener('loadeddata', function() {
+                    if (statusElement) {
+                        statusElement.textContent = 'Buffering...';
+                        statusElement.style.color = '#ff9800'; // Orange for buffering
+                    }
+                });
+
+                video.addEventListener('canplay', function() {
+                    if (statusElement) {
+                        statusElement.textContent = 'Ready to Play';
+                        statusElement.style.color = '#4CAF50'; // Green for ready
+                    }
+                });
+
+                video.addEventListener('playing', function() {
+                    if (statusElement) {
+                        statusElement.textContent = 'Playing';
+                        statusElement.style.color = '#4CAF50'; // Green for playing
+                    }
+                    // Hide gradient when video plays
+                    if (gradientAnimation) {
+                        gradientAnimation.style.opacity = '0';
+                    }
+                });
+
+                video.addEventListener('error', function() {
+                    if (statusElement) {
+                        statusElement.textContent = 'Video Load Error - Using Animated Background';
+                        statusElement.style.color = '#f44336'; // Red for error
+                    }
+                    // Show gradient on error
+                    if (gradientAnimation) {
+                        gradientAnimation.style.opacity = '1';
+                    }
+                });
+            }
+        }
+    });
+
+    // Stats Counter Animation
+    function animateCounter(element, target, duration = 2000) {
+        const start = 0;
+        const increment = target / (duration / 16); // 60fps
+        let current = start;
+        
+        // Check if target is a whole number
+        const isWholeNumber = target % 1 === 0;
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                // Display final value
+                if (isWholeNumber) {
+                    element.textContent = target >= 1000 ? target.toLocaleString() : Math.floor(target);
+                } else {
+                    element.textContent = target.toFixed(2);
+                }
+                clearInterval(timer);
+            } else {
+                // Display current value during animation
+                if (isWholeNumber) {
+                    element.textContent = current >= 1000 ? Math.floor(current).toLocaleString() : Math.floor(current);
+                } else {
+                    element.textContent = current.toFixed(2);
+                }
+            }
+        }, 16);
+    }
+
+    // Intersection Observer for stats
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                statNumbers.forEach(stat => {
+                    const target = parseFloat(stat.getAttribute('data-target'));
+                    animateCounter(stat, target);
+                });
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    // Observe stats grid
+    document.addEventListener('DOMContentLoaded', function() {
+        const statsGrid = document.querySelector('.stats-grid');
+        if (statsGrid) {
+            statsObserver.observe(statsGrid);
+        }
+    });
+
+    // Back to Top Button
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create back to top button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.className = 'back-to-top';
+        backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        backToTopBtn.setAttribute('aria-label', 'Back to top');
+        document.body.appendChild(backToTopBtn);
+
+        // Show/hide button on scroll
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Scroll to top on click
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

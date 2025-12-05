@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Guide - Prime IPTV</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="shortcut icon" type="image/png" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .config-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 6rem 0 3rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+        }
+
+        .config-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .config-hero h1 strong {
+            color: var(--netflix-red);
+            font-weight: 700;
+        }
+
+        .config-hero p {
+            font-size: 1rem;
+            color: #999;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .config-info {
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .config-badge {
+            background: var(--netflix-red);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .device-selector-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .selector-label {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .device-select {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 3px solid #333;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%23E50914' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.5rem center;
+            padding-right: 4rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .device-select option {
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem;
+            font-size: 1rem;
+        }
+
+        .device-select:hover {
+            border-color: var(--netflix-red);
+            background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.3);
+        }
+
+        .device-select:focus {
+            outline: none;
+            border-color: var(--netflix-red);
+            box-shadow: 0 0 0 4px rgba(229, 9, 20, 0.25), 0 8px 25px rgba(229, 9, 20, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .device-select:active {
+            transform: translateY(0);
+        }
+
+        .show-tutorial-btn {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            background: linear-gradient(135deg, var(--netflix-red) 0%, #c40812 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .show-tutorial-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .show-tutorial-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .show-tutorial-btn.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .show-tutorial-btn:hover {
+            background: linear-gradient(135deg, #ff0a18 0%, #e50914 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(229, 9, 20, 0.6);
+        }
+
+        .show-tutorial-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .tutorial-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: none;
+        }
+
+        .tutorial-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tutorial-header {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px 8px 0 0;
+            padding: 1.5rem;
+        }
+
+        .tutorial-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .tutorial-subtitle {
+            color: #999;
+            font-size: 0.95rem;
+        }
+
+        .tutorial-steps {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 2rem;
+        }
+
+        .step-item {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            border-color: var(--netflix-red);
+            background: #222;
+        }
+
+        .step-number {
+            background: var(--netflix-red);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #999;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .code-highlight {
+            background: #000;
+            border: 2px solid var(--netflix-red);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--netflix-red);
+            text-align: center;
+            letter-spacing: 3px;
+            margin: 1rem 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: var(--netflix-red);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: #c40812;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+        }
+
+        .help-section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .help-section h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .help-section p {
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .credentials-box {
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .credentials-box h4 {
+            color: var(--netflix-red);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="site-logo-link">
+            <img src="assets/logo.png" alt="Prime IPTV Logo" class="site-logo-img">
+        </a>
+        
+        <!-- Responsive Nav -->
+        <nav class="main-navigation">
+            <ul id="primary-menu" class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="tutorials.html" class="active">Tutorials</a></li>
+                <li><a href="support.html">Contact us</a></li>
+                <li class="nav-cta">
+                    <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial">
+                        <span>Free Trial</span>
+                        <span style="margin-left: 0.5rem;">💬</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial-mobile">
+                <span>Free Trial</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="primary-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="config-hero">
+    <div class="container">
+        <h1><strong>PRIME IPTV</strong> - CONFIGURATION GUIDE</h1>
+        <p>Activate your IPTV on any device</p>
+        
+        <div class="config-info">
+            <div class="config-badge">Download Code: 78522</div>
+            <span style="color: #999;">First install <strong style="color: var(--netflix-red);">Downloader by AFTV</strong>, then use code <strong style="color: var(--netflix-red);">78522</strong> to install IPTV Smarters Pro</span>
+        </div>
+    </div>
+</section>
+
+<!-- Device Selector -->
+<section class="device-selector-section">
+    <label class="selector-label">What are you installing on?</label>
+    <select id="deviceSelect" class="device-select" onchange="handleDeviceSelect(this.value)">
+        <option value="">Choose your device...</option>
+        <option value="firestick">Amazon Fire TV / Firestick</option>
+        <option value="android-tv">Android TV / Google TV (Sony, TCL, Hisense, Shield)</option>
+        <option value="android-phone">Android Phone/Tablet</option>
+        <option value="chromecast">Chromecast with Google TV</option>
+        <option value="ios">iPhone / iPad (iOS)</option>
+        <option value="samsung">Samsung Smart TV (Tizen)</option>
+        <option value="lg">LG Smart TV (webOS)</option>
+        <option value="windows">Windows PC</option>
+        <option value="mac">Mac (macOS)</option>
+        <option value="roku">Roku TV / Stick</option>
+        <option value="mag">MAG / Enigma2 / STBemu</option>
+        <option value="other">Other or I just want the M3U</option>
+    </select>
+    <button id="showTutorialBtn" class="show-tutorial-btn" onclick="showTutorial()">Show My Tutorial</button>
+    
+    <p style="color: #999; margin-top: 1rem; font-size: 0.9rem;">We automatically detect the right path for your device.</p>
+</section>
+
+<!-- Tutorials Container -->
+<div id="tutorialsContainer"></div>
+
+<!-- Help Section -->
+<section class="device-selector-section">
+    <div class="credentials-box">
+        <h4>Where can I find my login / playlist credentials?</h4>
+        <p style="color: #999;">Choose a device and click "Show My Tutorial".</p>
+    </div>
+    
+    <div class="help-section">
+        <h3>Still Stuck?</h3>
+        <p>We'll troubleshoot live (Firestick, Smart TV, phone, whatever your device).</p>
+        <a href="support.html" class="download-btn">Open Support Chat</a>
+    </div>
+</section>
+
+<script defer src="js/nav-indicator.js"></script>
+
+<script>
+// Tutorial data
+const tutorials = {
+    firestick: {
+        title: "Amazon Fire TV / Firestick",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Installez Downloader par AFTVnews, puis récupérez IPTV Smarters Pro via le code.",
+        steps: [
+            {
+                title: "Installer l'application Downloader by AFTV",
+                content: "Allez dans l'App Store de votre Fire TV → Recherchez <strong>Downloader by AFTV</strong> → Installez l'application."
+            },
+            {
+                title: "Activer « Installer des applications inconnues » pour Downloader by AFTV",
+                content: "Paramètres → Mon Fire TV → Options du développeur → Installer des applications inconnues → définissez <strong>Downloader by AFTV</strong> sur <strong>ACTIF</strong>."
+            },
+            {
+                title: "Lancez Downloader et entrez le code",
+                content: "Ouvrez l'application Downloader → Dans la barre de recherche, entrez le code <div class='code-highlight'>78522</div> Suivez les instructions à l'écran pour télécharger le programme d'installation."
+            },
+            {
+                title: "Installer IPTV Smarters Pro",
+                content: "Downloader by AFTV récupérera le programme d'installation. Confirmez l'installation lorsque vous y êtes invité."
+            },
+            {
+                title: "Open Smarters → Connexion",
+                content: "Choisissez « Connexion avec les codes Xtream » ou « Chargez votre M3U ». Utilisez les identifiants que nous vous avons envoyés par e-mail."
+            }
+        ]
+    },
+    "android-tv": {
+        title: "Android TV / Google TV (méthode de téléchargement)",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Si votre appareil peut installer des APK, Downloader est le chemin le plus rapide.",
+        steps: [
+            {
+                title: "Installer l'application Downloader by AFTV",
+                content: "Allez dans Google Play Store → Recherchez <strong>Downloader by AFTV</strong> → Installez l'application."
+            },
+            {
+                title: "Autoriser les sources inconnues (si demandé)",
+                content: "Paramètres → Sécurité et restrictions → Sources inconnues → activer pour <strong>Downloader by AFTV</strong>."
+            },
+            {
+                title: "Ouvrir Downloader et entrer le code",
+                content: "Lancez l'application Downloader → Dans la barre de recherche, saisissez le code <div class='code-highlight'>78522</div> Suivez les instructions à l'écran pour télécharger le programme d'installation."
+            },
+            {
+                title: "Installer IPTV Smarters Pro (APK)",
+                content: "Si votre appareil le bloque, utilisez plutôt <strong>le lien APK direct</strong> (ou transférez par USB)."
+            },
+            {
+                title: "Connectez-vous à Smarters",
+                content: "Choisissez les codes Xtream ou M3U et utilisez les informations d'identification que nous vous avons envoyées par e-mail."
+            }
+        ]
+    },
+    "android-phone": {
+        title: "Téléphone / tablette Android",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Deux options : installer depuis Play Store, ou utiliser Downloader + notre code.",
+        steps: [
+            {
+                title: "Play Store (recommandé)",
+                content: "Ouvrez Play Store → recherchez <strong>IPTV Smarters</strong>. Si vous ne le trouvez pas, essayez <strong>IBO Player</strong> ou <strong>TiviMate</strong>."
+            },
+            {
+                title: "Ou : Installer Downloader by AFTV + code",
+                content: "Installez <strong>Downloader by AFTV</strong> depuis le Play Store → Ouvrez l'application → Dans la barre de recherche, saisissez le code <div class='code-highlight'>78522</div> pour récupérer l'APK Smarters. En cas de blocage, utilisez <strong>l'APK direct</strong>."
+            },
+            {
+                title: "Se connecter",
+                content: "Ouvrez l'application → Codes Xtream ou M3U → saisissez les informations d'identification de votre e-mail."
+            },
+            {
+                title: "Casting (facultatif)",
+                content: "Diffusez sur un téléviseur à l'aide de Chromecast ou de la diffusion intégrée de l'application si elle est prise en charge."
+            }
+        ]
+    },
+    chromecast: {
+        title: "Chromecast avec Google TV (méthode du téléchargeur)",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Si votre appareil peut installer des APK, Downloader est le chemin le plus rapide.",
+        steps: [
+            {
+                title: "Installer l'application Downloader by AFTV",
+                content: "Allez dans Google Play Store → Recherchez <strong>Downloader by AFTV</strong> → Installez l'application."
+            },
+            {
+                title: "Autoriser les sources inconnues (si demandé)",
+                content: "Paramètres → Sécurité et restrictions → Sources inconnues → activer pour <strong>Downloader by AFTV</strong>."
+            },
+            {
+                title: "Ouvrir Downloader et entrer le code",
+                content: "Lancez l'application Downloader → Dans la barre de recherche, saisissez le code <div class='code-highlight'>78522</div> Suivez les instructions à l'écran pour télécharger le programme d'installation."
+            },
+            {
+                title: "Installer IPTV Smarters Pro (APK)",
+                content: "Si votre appareil le bloque, utilisez plutôt <strong>le lien APK direct</strong> (ou transférez par USB)."
+            },
+            {
+                title: "Connectez-vous à Smarters",
+                content: "Choisissez les codes Xtream ou M3U et utilisez les informations d'identification que nous vous avons envoyées par e-mail."
+            }
+        ]
+    },
+    ios: {
+        title: "iPhone / iPad (iOS)",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "iOS ne peut pas installer d'APK : utilisez la voie de l'App Store.",
+        steps: [
+            {
+                title: "Ouvrez l'App Store",
+                content: "Recherchez <strong>Smarters Player Lite</strong>. Si indisponible, recherchez <strong>IBO Player</strong> ou <strong>XCIPTV</strong> (disponibilité variable)."
+            },
+            {
+                title: "Installer et ouvrir",
+                content: "Accordez les autorisations multimédia/réseau lorsque vous y êtes invité."
+            },
+            {
+                title: "Se connecter",
+                content: "Utilisez les codes Xtream (serveur/nom d'utilisateur/mot de passe) ou collez M3U. <a href='https://apps.apple.com/us/app/ibo-pro-player/id6449647925' target='_blank' class='download-btn'>📥 Télécharger IBO Pro Player</a>"
+            },
+            {
+                title: "AirPlay (facultatif)",
+                content: "AirPlay sur Apple TV ou téléviseurs compatibles AirPlay."
+            }
+        ]
+    },
+    samsung: {
+        title: "Téléviseur intelligent Samsung (Tizen)",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Les téléviseurs Samsung n'installent pas d'APK Android. Utilisez une application de la boutique TV.",
+        steps: [
+            {
+                title: "Ouvrez les applications Samsung TV",
+                content: "Recherchez <strong>SET IPTV</strong>, <strong>Smart IPTV (SIPTV)</strong> ou <strong>IBO Player</strong>. La disponibilité varie selon la région et le modèle."
+            },
+            {
+                title: "Installer le lecteur",
+                content: "Ouvrez-le et notez tout code d'appairage/adresse MAC si demandé."
+            },
+            {
+                title: "Activer et lier la playlist",
+                content: "Suivez le site Web de l'application pour télécharger vos informations d'identification M3U/Xtream (certaines applications nécessitent des frais uniques minimes)."
+            },
+            {
+                title: "Actualiser l'application",
+                content: "Revenez à l'application TV et actualisez/rechargez les chaînes."
+            }
+        ]
+    },
+    lg: {
+        title: "Téléviseur intelligent LG (webOS)",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "webOS ne peut pas utiliser d'APK. Utilisez plutôt une application de lecture du Store.",
+        steps: [
+            {
+                title: "Ouvrir le LG Content Store",
+                content: "Recherchez <strong>Smarters Player</strong>, <strong>IBO Player</strong> ou <strong>XCIPTV</strong> (la disponibilité varie)."
+            },
+            {
+                title: "Installer et ouvrir",
+                content: "Notez tout code d'appairage/adresse MAC si nécessaire."
+            },
+            {
+                title: "Liez votre playlist",
+                content: "Téléchargez votre M3U ou entrez les détails Xtream sur le site Web de l'application si nécessaire."
+            },
+            {
+                title: "Rafraîchir et regarder",
+                content: "Rechargez les chaînes dans l'application TV."
+            }
+        ]
+    },
+    windows: {
+        title: "PC Windows",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Utilisez l'application Windows (si vous l'hébergez) ou VLC comme solution de secours universelle.",
+        steps: [
+            {
+                title: "Option A — Smarters pour Windows",
+                content: "Télécharger et installer : <strong>Windows Installer</strong> (si vous l'hébergez), ou <strong>Microsoft Store: VLC</strong>."
+            },
+            {
+                title: "Option B — VLC Player",
+                content: "Installer VLC : <strong>Microsoft Store: VLC</strong> → Média → Ouvrir le flux réseau → collez votre M3U → Lire."
+            },
+            {
+                title: "Connexion (Smarters)",
+                content: "Ouvrez Smarters → Codes Xtream ou M3U → saisissez les informations d'identification de votre e-mail."
+            }
+        ]
+    },
+    mac: {
+        title: "Mac (macOS)",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Utilisez l'application macOS si vous l'hébergez, ou VLC comme solution de secours.",
+        steps: [
+            {
+                title: "Option A — Smarters pour macOS",
+                content: "Télécharger et installer : <strong>build macOS</strong> (Intel/Apple Silicon)."
+            },
+            {
+                title: "Option B — VLC Player",
+                content: "Installez VLC : <strong>videoplan.org/vlc</strong> → Fichier → Ouvrir le réseau → collez votre M3U → Ouvrir."
+            },
+            {
+                title: "Connexion (Smarters)",
+                content: "Ouvrez l'application → choisissez Xtream Codes ou M3U → saisissez vos coordonnées."
+            }
+        ]
+    },
+    roku: {
+        title: "Roku TV / Clé",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Roku ne prend pas en charge les APK. Les applications IPTV sont limitées.",
+        steps: [
+            {
+                title: "Utiliser un appareil compagnon",
+                content: "Installez Smarters sur votre téléphone/tablette (iOS/Android) et diffusez/mettez en miroir sur Roku, ou utilisez un Chromecast/Fire TV pour les applications natives."
+            },
+            {
+                title: "Ou essayez une chaîne de lecteur multimédia",
+                content: "Certaines chaînes de lecteurs multimédias peuvent ouvrir les liens M3U, mais leur disponibilité varie régulièrement. Contactez-nous pour connaître la meilleure option."
+            },
+            {
+                title: "Meilleure expérience",
+                content: "Nous recommandons Chromecast avec Google TV ou Fire TV pour toutes les fonctionnalités."
+            }
+        ]
+    },
+    mag: {
+        title: "MAG / Enigma2 / STBemu",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "Ces boîtes utilisent généralement des connexions de type MAC/portail.",
+        steps: [
+            {
+                title: "Fournissez votre box MAC au support",
+                content: "Nous confirmerons la compatibilité et les détails du portail."
+            },
+            {
+                title: "Configurer le portail/l'URL",
+                content: "Saisissez l'URL du portail que nous fournissons ; redémarrez la boîte si demandé."
+            },
+            {
+                title: "Enigma2",
+                content: "Utilisez un plugin Enigma2 ou une méthode de playlist adaptée à votre image. Contactez-nous en cas de doute."
+            }
+        ]
+    },
+    other: {
+        title: "Autres appareils / Je veux juste le M3U",
+        subtitle: "PRIME IPTV - STEP BY STEP",
+        description: "La plupart des lecteurs multimédias peuvent ouvrir un lien de flux M3U.",
+        steps: [
+            {
+                title: "Copiez votre lien M3U",
+                content: "Collez-le dans VLC / la boîte de flux réseau de votre lecteur."
+            },
+            {
+                title: "Alternative à Xtream",
+                content: "Si votre application prend en charge les codes Xtream, utilisez plutôt le serveur (URL)/nom d'utilisateur/mot de passe de notre e-mail."
+            },
+            {
+                title: "Besoin d'une application ?",
+                content: "Essayez VLC : <strong>Windows / MacOS</strong>. Sur les téléviseurs connectés, utilisez un lecteur IPTV. Contactez-nous si vous avez besoin d'aide pour choisir."
+            }
+        ]
+    }
+};
+
+function handleDeviceSelect(device) {
+    const btn = document.getElementById('showTutorialBtn');
+    if (device) {
+        btn.classList.add('active');
+        btn.setAttribute('data-device', device);
+    } else {
+        btn.classList.remove('active');
+    }
+}
+
+function showTutorial() {
+    const btn = document.getElementById('showTutorialBtn');
+    const device = btn.getAttribute('data-device');
+    const container = document.getElementById('tutorialsContainer');
+    
+    if (!device || !tutorials[device]) return;
+    
+    const tutorial = tutorials[device];
+    
+    let stepsHTML = '';
+    tutorial.steps.forEach((step, index) => {
+        stepsHTML += `
+            <div class="step-item">
+                <div class="step-number">${index + 1}</div>
+                <div class="step-content">
+                    <h4>${step.title}</h4>
+                    <p>${step.content}</p>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = `
+        <div class="tutorial-container active">
+            <div class="tutorial-header">
+                <h2 class="tutorial-title">${tutorial.title}</h2>
+                <p class="tutorial-subtitle">${tutorial.subtitle}</p>
+                <p style="color: #999; margin-top: 0.5rem;">${tutorial.description}</p>
+            </div>
+            <div class="tutorial-steps">
+                ${stepsHTML}
+            </div>
+            
+            <div class="help-section" style="margin-top: 2rem;">
+                <p style="color: #999;">Vous ne trouvez pas Downloader ou l'application ? Les applications sont masquées selon les régions. Contactez-nous et nous vous enverrons le lien correspondant à votre modèle. <a href="support.html" style="color: var(--netflix-red);">Ouvrir le chat</a>.</p>
+            </div>
+            
+            <div class="help-section" style="margin-top: 1rem;">
+                <h3>Vous rencontrez des difficultés pour installer l'application ?</h3>
+                <p>Conçu pour les clients Prime IPTV : la perfection n'existe pas.</p>
+            </div>
+        </div>
+    `;
+    
+    // Scroll to tutorial
+    setTimeout(() => {
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+}
+</script>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Prime IPTV Logo" class="footer-logo">
+                <p class="footer-description">Premium IPTV service provider offering high-quality streams for individuals worldwide.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>📧 contact@primeiptv.com</p>
+                <p>💬 WhatsApp: +1 (905) 390-1140</p>
+                <p>⏰ Support 24/7</p>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Join Us</h4>
+                <p>Get updates on special offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email" required>
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2025 Prime IPTV. All rights reserved</p>
+            <p>Designed with ❤️ for an optimal IPTV experience</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile Menu Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.querySelector('.mobile-menu-btn');
+        const links = document.getElementById('primary-menu');
+        
+        if (!btn || !links) return;
+
+        const icon = btn.querySelector('i');
+
+        function closeMenu() {
+            links.classList.remove('is-open');
+            btn.classList.remove('active');
+            btn.setAttribute('aria-expanded', 'false');
+            if (icon) icon.className = 'fas fa-bars';
+        }
+
+        btn.addEventListener('click', function() {
+            const open = links.classList.toggle('is-open');
+            btn.classList.toggle('active', open);
+            btn.setAttribute('aria-expanded', String(open));
+            if (icon) icon.className = open ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // Close on link click (mobile)
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                closeMenu();
+            });
+        });
+
+        // Close if resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 900) closeMenu();
+        });
+    });
+
+    // Sticky Header
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+
+</body>
+</html>

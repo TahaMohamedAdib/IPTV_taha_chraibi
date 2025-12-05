@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime IPTV - Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --netflix-red: #E50914;
+            --netflix-red-dark: #b20710;
+            --netflix-red-light: #f40612;
+            --dark-bg: #000000;
+            --dark-card: #141414;
+            --dark-secondary: #181818;
+            --dark-hover: #2f2f2f;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --border-dark: #333333;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 6rem 0; }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        
+        a { color: var(--text-primary); text-decoration: none; transition: all 0.3s ease; }
+        a:hover { color: var(--netflix-red); }
+        
+        p { color: var(--text-secondary); margin-bottom: 1rem; }
+        
+        /* Header */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: none;
+            transition: all 0.3s ease;
+        }
+        
+        .site-header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .site-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--netflix-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .main-navigation ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .main-navigation a {
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .main-navigation a:hover { color: var(--netflix-red); }
+        
+        /* Hero */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), 
+                        linear-gradient(90deg, #000000 0%, #1a0000 100%);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.2;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--netflix-red) 0%, transparent 70%),
+                radial-gradient(circle at 80% 80%, var(--netflix-red-dark) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--netflix-red);
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.5);
+            font-weight: 700;
+        }
+        
+        .btn-primary:hover {
+            background: var(--netflix-red-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 9, 20, 0.7);
+        }
+        
+        .btn-secondary {
+            background: rgba(109, 109, 110, 0.7);
+            color: var(--text-primary);
+            border: none;
+            font-weight: 700;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(109, 109, 110, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            color: var(--text-primary);
+        }
+        
+        /* About */
+        .about-section { background: var(--dark-bg); }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .about-features li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .about-features li::before {
+            content: "✓";
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: var(--netflix-red);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--dark-card);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-dark);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: scale(1.05);
+            background: var(--dark-hover);
+            border-color: var(--netflix-red);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Pricing */
+        .pricing-section { background: var(--dark-bg); }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--netflix-red);
+            transform: scale(1.05);
+            background: var(--dark-secondary);
+            box-shadow: 0 12px 40px rgba(229, 9, 20, 0.3);
+        }
+        
+        .pricing-card.featured::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--netflix-red);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            background: var(--dark-hover);
+            border-color: var(--netflix-red);
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 2rem 0;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            padding: 0;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+        
+        .pricing-features li::before {
+            content: "✓ ";
+            color: var(--netflix-red);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            background: var(--dark-hover);
+            transform: scale(1.02);
+        }
+        
+        .testimonial-rating {
+            color: var(--netflix-red);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--netflix-red);
+        }
+        
+        /* FAQ */
+        .faq-section { background: var(--dark-bg); }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--dark-card);
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border: none;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        
+        .faq-question:hover { color: var(--netflix-red); }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+        }
+        
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .faq-item.active .faq-answer { max-height: 500px; }
+        
+        /* Footer */
+        .site-footer {
+            background: var(--dark-bg);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-dark);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="site-logo-link">
+            <img src="assets/logo.png" alt="Prime IPTV Logo" class="site-logo-img">
+        </a>
+        
+        <!-- Responsive Nav -->
+        <nav class="main-navigation">
+            <ul id="primary-menu" class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="support.html">Contact us</a></li>
+                <li class="nav-cta">
+                    <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial">
+                        <span>Free Trial</span>
+                        <span style="margin-left: 0.5rem;">💬</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <a href="https://wa.me/19053901140?text=Hello%2C%20I%27m%20interested%20in%20a%20free%20trial%20of%20Prime%20IPTV" target="_blank" class="btn-free-trial-mobile">
+                <span>Free Trial</span>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="primary-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+    <div class="hero-background"></div>
+    <div class="container hero-content">
+        <h1>Unlimited Entertainment, Anytime, Anywhere</h1>
+        <p>Experience premium IPTV service with over 10,000+ channels, HD/4K quality, and 99.9% uptime</p>
+        <div class="hero-buttons">
+            <a href="pricing.html" class="btn btn-primary">Get Started Now</a>
+            <a href="features.html" class="btn btn-secondary">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section about-section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Why Choose Our IPTV Service?</h2>
+                <p>We provide the most reliable and feature-rich IPTV experience with crystal-clear HD/4K streaming, stable servers, and 24/7 customer support.</p>
+                <ul class="about-features">
+                    <li>10,000+ Live TV Channels</li>
+                    <li>HD, Full HD & 4K Quality</li>
+                    <li>99.9% Server Uptime</li>
+                    <li>Works on All Devices</li>
+                    <li>24/7 Technical Support</li>
+                    <li>7-Day Money-Back Guarantee</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <div style="background: linear-gradient(135deg, #141414, #2a0000); border-radius: 8px; height: 400px; display: flex; align-items: center; justify-content: center; font-size: 5rem; border: 1px solid #333;">
+                    📺
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="section features-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Amazing Features</h2>
+            <p>Everything you need for the perfect streaming experience</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Setup</h3>
+                <p>Get started in minutes with our simple setup process</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>All Devices</h3>
+                <p>Watch on Smart TV, phone, tablet, or computer</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure Payment</h3>
+                <p>SSL encrypted transactions via Shopify</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>24/7 Support</h3>
+                <p>Always here to help via chat, WhatsApp, or email</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Money-Back</h3>
+                <p>7-day satisfaction guarantee on all plans</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Global Content</h3>
+                <p>Channels from around the world in multiple languages</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="section pricing-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Choose Your Plan</h2>
+            <p>Flexible pricing to fit your needs</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Monthly</h3>
+                </div>
+                <div class="pricing-price">$15<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>10,000+ Channels</li>
+                    <li>HD/4K Quality</li>
+                    <li>All Devices</li>
+                    <li>24/7 Support</li>
+                    <li>Cancel Anytime</li>
+                </ul>
+                <a href="#" class="btn btn-secondary">Subscribe Now</a>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-header">
+                    <h3>Quarterly</h3>
+                </div>
+                <div class="pricing-price">$35<span>/3 months</span></div>
+                <ul class="pricing-features">
+                    <li>10,000+ Channels</li>
+                    <li>HD/4K Quality</li>
+                    <li>All Devices</li>
+                    <li>Priority Support</li>
+                    <li>Save 22%</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Subscribe Now</a>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Yearly</h3>
+                </div>
+                <div class="pricing-price">$120<span>/year</span></div>
+                <ul class="pricing-features">
+                    <li>10,000+ Channels</li>
+                    <li>HD/4K Quality</li>
+                    <li>All Devices</li>
+                    <li>VIP Support</li>
+                    <li>Save 33%</li>
+                </ul>
+                <a href="#" class="btn btn-secondary">Subscribe Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="reviews" class="section testimonials-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>What Our Customers Say</h2>
+            <p>Trusted by thousands worldwide</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-rating">★★★★★</div>
+                <div class="testimonial-text">"Amazing service! Crystal clear quality and never buffers. Been using for 6 months and couldn't be happier!"</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div>
+                        <h4>John Smith</h4>
+                        <p>Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">★★★★★</div>
+                <div class="testimonial-text">"Best IPTV provider I've tried. Great channel selection and customer support is always helpful."</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div>
+                        <h4>Sarah Johnson</h4>
+                        <p>Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">★★★★★</div>
+                <div class="testimonial-text">"The 4K quality is incredible and works perfectly on all my devices. Highly recommend!"</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div>
+                        <h4>Michael Chen</h4>
+                        <p>Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="section faq-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    What devices are supported?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Our IPTV service works on Smart TVs, Android/iOS phones and tablets, computers (Windows/Mac), Fire Stick, Apple TV, Android boxes, and more.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I get started?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Choose a subscription plan, complete checkout via Shopify, and you'll receive login credentials via email within minutes.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is there a free trial?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">We offer a 7-day money-back guarantee on all plans. If you're not satisfied, request a full refund.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What channels are included?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Over 10,000 channels including sports, movies, entertainment, news, kids content, and international channels.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="support" class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Prime IPTV Logo" class="footer-logo">
+                <p class="footer-description">Premium IPTV service provider offering high-quality streams for individuals worldwide.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="mailto:contact@primeiptv.com">contact@primeiptv.com</a></li>
+                    <li><a href="tel:+19053901140">+1 (905) 390-1140</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="footer-newsletter">
+                <h4>Join Us</h4>
+                <p>Get updates on special offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email" required>
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="#">DMCA</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Refund Policy</a>
+                <a href="faq.html">FAQ</a>
+                <a href="support.html">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2025 Prime IPTV. All rights reserved</p>
+                <p>Designed with ❤️ for an optimal IPTV experience</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script defer src="js/nav-indicator.js"></script>
+
+<script>
+    // Mobile Menu Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.querySelector('.mobile-menu-btn');
+        const links = document.getElementById('primary-menu');
+        
+        if (!btn || !links) return;
+
+        const icon = btn.querySelector('i');
+
+        function closeMenu() {
+            links.classList.remove('is-open');
+            btn.classList.remove('active');
+            btn.setAttribute('aria-expanded', 'false');
+            if (icon) icon.className = 'fas fa-bars';
+        }
+
+        btn.addEventListener('click', function() {
+            const open = links.classList.toggle('is-open');
+            btn.classList.toggle('active', open);
+            btn.setAttribute('aria-expanded', String(open));
+            if (icon) icon.className = open ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // Close on link click (mobile)
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                closeMenu();
+            });
+        });
+
+        // Close if resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 900) closeMenu();
+        });
+    });
+
+    // Sticky Header
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+
+</body>
+</html>
