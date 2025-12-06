@@ -80,14 +80,37 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        /* Gradient Text Effect */
-        .pricing-header-title span {
+        /* --- NEW CINEMATIC SHINE EFFECT --- */
+        .pricing-header-title span.cine-shine {
             display: block;
-            background: linear-gradient(to bottom right, #fff 30%, #ffcccb 100%);
+            /* The Shine Gradient: White -> Gold -> White */
+            background: linear-gradient(
+                110deg, 
+                #ffffff 40%, 
+                #ffd700 50%, 
+                #ffffff 60%
+            );
+            background-size: 200% auto;
+            
+            /* Clips background to text */
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            
+            /* The Animation */
+            animation: shineMove 3s linear infinite;
+            
             margin-top: 0.5rem;
+            text-shadow: none; /* Remove shadow to make shine clear */
+        }
+
+        @keyframes shineMove {
+            0% {
+                background-position: 200% center;
+            }
+            100% {
+                background-position: -200% center;
+            }
         }
 
         .pricing-header-subtitle {
@@ -407,6 +430,288 @@
                 align-items: center;
             }
         }
+        
+        /* --- NEW "ROTATING LASER" BORDER EFFECT (ALWAYS ON) --- */
+
+        /* 1. Base Card Setup */
+        .pricing-card-new {
+            position: relative;
+            background: #000;
+            overflow: hidden; 
+            z-index: 0; 
+            border-radius: 16px; 
+            border: none; /* No static border, the laser is the border */
+            /* Optional: Add a subtle glow behind the whole card */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* 2. The Rotating Beam */
+        .pricing-card-new::before {
+            content: '';
+            position: absolute;
+            z-index: -2;
+            left: -50%;
+            top: -50%;
+            width: 200%;
+            height: 200%;
+            background-repeat: no-repeat;
+            background-size: 50% 50%, 50% 50%;
+            background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+            
+            /* Spin Animation - ALWAYS ON */
+            animation: rotateLaser 4s linear infinite;
+            opacity: 1; /* Always visible */
+        }
+
+        /* 3. The Inner Card Background (Creates the "Hole") */
+        .pricing-card-new::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            /* This controls border thickness (2px) */
+            left: 2px;
+            top: 2px;
+            width: calc(100% - 4px);
+            height: calc(100% - 4px);
+            background: #000;
+            border-radius: 14px; 
+        }
+
+        /* 4. Ensure Text/Buttons sit ON TOP */
+        .pricing-card-new > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- ESSENTIAL PLAN (Red Laser) --- */
+        .pricing-card-new[data-plan="essential"]::before {
+            /* Red Gradient Laser */
+            background: conic-gradient(transparent 0deg, transparent 270deg, #E50914 360deg);
+        }
+
+        /* --- VIP PLAN (Gold Laser) --- */
+        .pricing-card-new[data-plan="vip"]::before {
+            /* Gold Gradient Laser */
+            background: conic-gradient(transparent 0deg, transparent 270deg, #ffd700 360deg);
+            /* Make the Gold laser spin slightly faster for effect? (Optional) */
+            animation: rotateLaser 3s linear infinite; 
+        }
+
+        /* Animation Keyframes */
+        @keyframes rotateLaser {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* --- TRUST BADGES CSS --- */
+        .trust-badges {
+            margin-top: 1rem;
+            padding: 0 1.5rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1); /* Subtle divider */
+            padding-top: 1rem;
+        }
+
+        .secure-text {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            font-weight: 500;
+        }
+
+        .secure-text i {
+            color: #00d26a; /* Green lock for trust */
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 1.8rem; /* Icon size */
+            color: rgba(255, 255, 255, 0.4); /* Muted white */
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect to make them shine */
+        .pricing-card-new:hover .payment-icons {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- MOBILE MENU & HEADER FIX --- */
+        @media (max-width: 900px) {
+            .site-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 70px;
+                background-color: #000000; /* Solid Black */
+                z-index: 1000;
+                padding: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            }
+            body { padding-top: 70px; } /* Push content down */
+        }
+
+        /* --- FEATURES GRID (Desktop Default) --- */
+        .features-comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .comparison-feature-row {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            min-height: 140px;
+        }
+
+        .feature-name {
+            font-size: 0.95rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+
+        /* --- FEATURES GRID MOBILE "PERFECT FIT" --- */
+        @media (max-width: 768px) {
+            .features-comparison-grid {
+                /* Keep 2 columns, but reduce gap */
+                grid-template-columns: 1fr 1fr !important;
+                gap: 8px; 
+            }
+
+            .comparison-feature-row {
+                /* Reduce padding */
+                padding: 10px 4px; 
+                min-height: 110px; 
+            }
+
+            .feature-icon {
+                font-size: 1.4rem; 
+                margin-bottom: 0.3rem;
+            }
+
+            .feature-name {
+                /* Smaller text to fit long titles */
+                font-size: 0.75rem; 
+                line-height: 1.2; 
+                margin-bottom: 0.5rem;
+                width: 100%;
+                word-wrap: break-word; 
+            }
+
+            .feature-badge {
+                font-size: 0.65rem; 
+                padding: 0.3rem 0.6rem;
+            }
+        }
+        /* --- CUSTOM CHAT BUTTON (THE HACKER WAY) --- */
+.custom-chat-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99999;
+    
+    /* Glassy Red Gradient Background */
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.9), rgba(160, 0, 10, 0.95));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    color: white;
+    padding: 14px 24px;
+    border-radius: 50px;
+    
+    /* Premium Border & Glow */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 10px 30px rgba(229, 9, 20, 0.4),
+        0 0 0 1px rgba(0, 0, 0, 0.2);
+        
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Hover Effect: Lifts up and gets brighter */
+.custom-chat-btn:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 15px 40px rgba(229, 9, 20, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #ff1f1f, #b30000);
+}
+
+/* The Headset Icon */
+.custom-chat-btn i {
+    font-size: 1.2rem;
+}
+
+/* The Green "Online" Dot */
+.online-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00e676; /* Bright Green */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00e676;
+    animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 230, 118, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .custom-chat-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 0.85rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -449,8 +754,7 @@
 <section class="pricing-header-section">
     <div class="container">
         <h1 class="pricing-header-title">
-        
-            <span>IPTV Pricing</span>
+            <span class="cine-shine">IPTV Pricing</span>
         </h1>
         <div class="pricing-header-subtitle">Choose the perfect plan for your IPTV streaming needs!</div>
     </div>
@@ -499,6 +803,17 @@
                     <li>7-day money-back guarantee</li>
                 </ul>
                 <button class="order-button order-button-red" onclick="orderPlan('essential')">Order Now</button>
+                
+                <div class="trust-badges">
+                    <div class="secure-text"><i class="fas fa-lock"></i> SSL Secure Payment</div>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-paypal"></i>
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                </div>
+
             </div>
 
             <div class="pricing-card-new vip-elite-card" data-plan="vip">
@@ -544,6 +859,17 @@
                     <li>15-day full money-back guarantee</li>
                 </ul>
                 <button class="order-button order-button-yellow" onclick="orderPlan('vip')">Order Now</button>
+                
+                <div class="trust-badges">
+                    <div class="secure-text"><i class="fas fa-lock"></i> SSL Secure Payment</div>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-paypal"></i>
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -585,7 +911,7 @@
             </div>
         </div>
 
-        <div class="features-comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="features-comparison-grid">
             <div class="comparison-feature-row">
                 <div class="feature-info">
                     <span class="feature-icon">⚡</span>
@@ -727,6 +1053,11 @@
             </div>
         </div>
     </div>
+    <div class="custom-chat-btn" onclick="Tawk_API.toggle()">
+    <i class="fas fa-headset"></i> 
+    <span>Live Support</span>
+    <div class="online-dot"></div>
+</div>
 </footer>
 
     <script defer src="js/nav-indicator.js"></script>
@@ -971,6 +1302,18 @@
             }
         }
     </script>
-
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6933316729e54f197c444ed2/1jbnvi01i';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>
