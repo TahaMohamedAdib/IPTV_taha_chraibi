@@ -178,5 +178,31 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+
+// --- NEW LOGIC: Hide Button when Chat Opens ---
+Tawk_API.onChatMaximized = function(){
+    // When chat opens, hide the custom button
+    var btn = document.querySelector('.custom-chat-btn');
+    if(btn) btn.style.display = 'none';
+};
+
+Tawk_API.onChatMinimized = function(){
+    // When chat closes, bring back the custom button
+    var btn = document.querySelector('.custom-chat-btn');
+    if(btn) btn.style.display = 'flex';
+};
+// ----------------------------------------------
+
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6933316729e54f197c444ed2/1jbnvi01i';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 </body>
 </html>
